@@ -1,0 +1,2 @@
+@alias kilogram = kg = kilo = kilos
+@alias gram = gr = grams

@@ -1,4 +1,5 @@
 from fractions import Fraction
+import pint
 
 def number_str_to_float(amount_str:str) -> (any, bool):
     """
@@ -26,3 +27,9 @@ def number_str_to_float(amount_str:str) -> (any, bool):
     if isinstance(number_as_float, float):
         success = True
     return number_as_float, success
+
+ureg = pint.UnitRegistry()
+
+a = 20 * ureg.grams
+
+pass
