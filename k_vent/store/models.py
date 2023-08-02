@@ -4,6 +4,7 @@ from .utils import number_str_to_float
 from .validators import validate_unit_of_measure
 import pint
 from pathlib import Path
+from datetime import datetime
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # Create your models here.
@@ -85,6 +86,9 @@ class InventoryOrder(models.Model):
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
     realized = models.BooleanField(default=False)
+    realized_date = models.DateTimeField(null=True, blank=True, default=None)
+    realized_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, default=None, related_name='inventory_order_realized_by')
+
 
     def __repr__(self):
         return f"{self.user.username} - {self.created}"
@@ -93,13 +97,11 @@ class InventoryOrder(models.Model):
         return f"{self.user.username} - {self.created}"
     
     def realize_order(self):
-        print('hssere')
         if self.realized == True:
             return None
         ureg = pint.UnitRegistry()
         for item in self.items.all():
             item_mass = ureg(f'{item.quantity} {item.unit_converted}')
-            print('here')
             try:
                 inventory_item = Inventory.objects.get(product=item.product)
                 inventory_item_mass = ureg(f'{inventory_item.quantity} {inventory_item.unit_converted}')
@@ -107,8 +109,8 @@ class InventoryOrder(models.Model):
                 inventory_item.quantity = str(new_mass).split()[0]
                 inventory_item.save()
                 self.realized = True
+                self.realized_date = datetime.now()
                 self.save()
-                print('updated')
             except Inventory.DoesNotExist:
                 inventory_item = Inventory(
                     product = item.product,
@@ -117,11 +119,10 @@ class InventoryOrder(models.Model):
                 )
                 inventory_item.save()
                 self.realized = True
+                self.realized_date = datetime.now()
                 self.save()
-                print('created')
             except:
                 pass
-                print('what')
 
 
 
@@ -149,15 +150,16 @@ class ShopOrder(models.Model):
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
     realized = models.BooleanField(default=False)
+    realized_date = models.DateTimeField(null=True, blank=True, default=None)
+    realized_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, default=None, related_name='shop_order_realized_by')
+
 
     def realize_order(self):
-        print('hssere')
         if self.realized == True:
             return None
         ureg = pint.UnitRegistry()
         for item in self.items.all():
             item_mass = ureg(f'{item.quantity} {item.unit_converted}')
-            print('here')
             try:
                 inventory_item = Inventory.objects.get(product=item.product)
                 inventory_item_mass = ureg(f'{inventory_item.quantity} {inventory_item.unit_converted}')
@@ -165,8 +167,8 @@ class ShopOrder(models.Model):
                 inventory_item.quantity = str(new_mass).split()[0]
                 inventory_item.save()
                 self.realized = True
+                self.realized_date = datetime.now()
                 self.save()
-                print('updated')
             except Inventory.DoesNotExist:
                 inventory_item = Inventory(
                     product = item.product,
@@ -175,8 +177,7 @@ class ShopOrder(models.Model):
                 )
                 inventory_item.save()
                 self.realized = True
+                self.realized_date = datetime.now()
                 self.save()
-                print('created')
             except:
                 pass
-                print('what')
