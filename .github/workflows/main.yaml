@@ -29,5 +29,5 @@ jobs:
           pip install -r requirements.txt
       - name: Run Tests
         run: |
-          cd ..
+          cd k_vent
           python manage.py test
