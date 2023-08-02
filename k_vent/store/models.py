@@ -4,6 +4,7 @@ from .utils import number_str_to_float
 from .validators import validate_unit_of_measure
 import pint
 from pathlib import Path
+from django.utils import timezone
 from datetime import datetime
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -109,7 +110,7 @@ class InventoryOrder(models.Model):
                 inventory_item.quantity = str(new_mass).split()[0]
                 inventory_item.save()
                 self.realized = True
-                self.realized_date = datetime.now()
+                self.realized_date = timezone.now()
                 self.save()
             except Inventory.DoesNotExist:
                 inventory_item = Inventory(
@@ -119,7 +120,7 @@ class InventoryOrder(models.Model):
                 )
                 inventory_item.save()
                 self.realized = True
-                self.realized_date = datetime.now()
+                self.realized_date = timezone.now()
                 self.save()
             except:
                 pass
@@ -167,7 +168,7 @@ class ShopOrder(models.Model):
                 inventory_item.quantity = str(new_mass).split()[0]
                 inventory_item.save()
                 self.realized = True
-                self.realized_date = datetime.now()
+                self.realized_date = timezone.now()
                 self.save()
             except Inventory.DoesNotExist:
                 inventory_item = Inventory(
@@ -177,7 +178,7 @@ class ShopOrder(models.Model):
                 )
                 inventory_item.save()
                 self.realized = True
-                self.realized_date = datetime.now()
+                self.realized_date = timezone.now()
                 self.save()
             except:
                 pass

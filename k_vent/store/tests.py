@@ -1,6 +1,8 @@
 from django.test import TestCase
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
+from datetime import datetime, timedelta
+from django.utils import timezone
 from .models import (
     Product,
     Inventory,
@@ -54,8 +56,6 @@ class ProductTestCase(TestCase):
         self.inventory_order_a.save()
         self.inventory_order_a.items.add(self.inventory_order_item_a, self.inventory_order_item_b)
 
- ###
-
         self.shop_order_item_a = ShopOrderItem.objects.create(
             product = self.product_a,
             unit = 'kg',
@@ -96,6 +96,11 @@ class ProductTestCase(TestCase):
         self.shop_order_a.realize_order()
         self.inventory_a = Inventory.objects.get(product=self.product_a)
         self.assertEqual(self.inventory_a.quantity_as_float, 0)
+
+    def test_realize_order_time(self):
+        self.inventory_order_a.realize_order()
+        self.assertAlmostEqual(self.inventory_order_a.realized_date, timezone.now() ,delta=timezone.timedelta(seconds=2))
+
 
 
 
