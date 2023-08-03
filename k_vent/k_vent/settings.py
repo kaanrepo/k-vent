@@ -38,10 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    ## django-apps
+    # django-apps
     'accounts',
     'store',
-    ##Third party apps
+    # Third party apps
     'crispy_forms'
 ]
 
@@ -60,7 +60,7 @@ ROOT_URLCONF = 'k_vent.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

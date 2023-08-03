@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import PermissionsMixin
 # Create your models here.
 
+
 class UserManager(BaseUserManager):
     def create_user(self, username, email, password=None, is_active=True, is_staff=False, is_superuser=False):
         if not username:
@@ -12,10 +13,10 @@ class UserManager(BaseUserManager):
             raise ValidationError('Email is required.')
         if not password:
             raise ValidationError('Password is required.')
-        
+
         user = self.model(
-            username = username,
-            email = self.normalize_email(email)
+            username=username,
+            email=self.normalize_email(email)
         )
         user.set_password(password)
         user.staff = is_staff
@@ -23,9 +24,6 @@ class UserManager(BaseUserManager):
         user.active = is_active
         user.save(using=self._db)
         return user
-
-
-
 
     def create_staff(self, username, email, password=None):
         user = self.create_user(
@@ -45,6 +43,7 @@ class UserManager(BaseUserManager):
             is_superuser=True
         )
         return user
+
 
 class User(AbstractBaseUser):
     username = models.CharField(max_length=50, unique=True)
@@ -68,7 +67,6 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
-    
 
     @property
     def is_staff(self):

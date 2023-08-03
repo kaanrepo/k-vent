@@ -5,6 +5,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+
 def validate_unit_of_measure(value):
     ureg = pint.UnitRegistry()
     ureg.load_definitions(BASE_DIR / 'my_def.txt')

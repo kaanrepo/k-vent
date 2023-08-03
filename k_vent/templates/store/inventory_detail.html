@@ -1,0 +1,16 @@
+{% block content %}
+
+
+<body>
+    <h1>Inventory Detail</h1>
+    <p><strong>Product Name:</strong> {{ item.product.name }}</p>
+    <p><strong>Unit:</strong> {{ item.unit }}</p>
+    <p><strong>Quantity:</strong> {{ item.quantity }}</p>
+    <p><strong>Ideal Quantity:</strong> {{ item.ideal_quantity }}</p>
+    <p><strong>Updated:</strong> {{ item.updated }}</p>
+    <a href="{% url 'inventory-update-view' item.pk %}">Edit</a>
+    <a href="{% url 'inventory-list-view' %}">Back to Inventory List</a>
+</body>
+
+
+{% endblock content %}

@@ -1,0 +1,11 @@
+{% extends "main/index.html" %}
+
+{% block content %}
+
+<form method='POST'>
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type='submit'>Submit</button> <a href={% url 'product-list-view' %}><button >Cancel</button></a>
+</form>
+
+{% endblock content %}

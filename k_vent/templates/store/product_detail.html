@@ -1,0 +1,12 @@
+{% extends "main/index.html" %}
+
+{% block content %}
+
+<ul>{{item.name}}</ul>
+<ul>{{item.price}} / {{item.unit_converted}}</ul>
+<ul><a href={% url 'product-detail-view' item.pk %}>Item link</a></ul>
+<ul><a href={{item.get_absolute_url}}>Absolute Url</a></ul>
+<ul><a href={% url 'product-update-view' item.pk %}>Edit this.</a></ul>
+
+
+{% endblock content %}

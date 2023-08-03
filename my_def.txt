@@ -1,2 +1,3 @@
 @alias kilogram = kg = kilo = kilos
 @alias gram = gr = grams
+@alias count = tane = adet

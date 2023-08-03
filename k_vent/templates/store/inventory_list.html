@@ -1,0 +1,13 @@
+
+{% block content %}
+<body>
+    <h1>Inventory List</h1>
+    <ul>
+        {% for item in qs %}
+            <li><a href="{% url 'inventory-detail-view' item.pk %}">{{ item.product.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'inventory-create-view' %}">Add New Inventory</a>
+</body>
+
+{% endblock content %}

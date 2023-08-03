@@ -1,0 +1,21 @@
+{% extends "main/index.html" %}
+
+{% block content %}
+
+
+
+<h3>Products</h3>
+
+<a href={% url 'product-create-view' %}>Create a new one.</a>
+
+
+{% for item in qs %}
+    <ul>{{item.name}}</ul>
+    <ul>{{item.price}} / {{item.unit_converted}}</ul>
+    <ul><a href={% url 'product-detail-view' item.pk %}>Item link</a></ul>
+    <ul><a href={{item.get_absolute_url}}>Absolute Url</a></ul>
+    <ul><a href={% url 'product-update-view' item.pk %}>Edit this.</a></ul>
+    <hr>
+{% endfor %}
+
+{% endblock content %}
