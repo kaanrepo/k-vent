@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import ProductForm, InventoryForm
+from .forms import ProductForm, InventoryForm, Aform
 from .models import (
     Product,
     Inventory,
@@ -98,3 +98,14 @@ def inventory_update_view(request, pk):
         'form': form
     }
     return render(request, 'store/inventory_create_update.html', context)
+
+
+def test_select2(request):
+    form = Aform(request.POST or None)
+    if request.method == "POST":
+        data = form.data
+        print(data)
+    context = {
+        'form' : form
+    }
+    return render(request, 'store/test.html', context)

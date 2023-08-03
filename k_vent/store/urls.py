@@ -7,7 +7,8 @@ from .views import(
     inventory_list_view,
     inventory_update_view,
     inventory_detail_view,
-    inventory_create_view
+    inventory_create_view,
+    test_select2
 )
 
 
@@ -22,4 +23,6 @@ urlpatterns = [
     path('inventory/create/', inventory_create_view, name='inventory-create-view'),
     path('inventory/<int:pk>/', inventory_detail_view, name='inventory-detail-view'),
     path('inventory/<int:pk>/update/', inventory_update_view, name='inventory-update-view'),
+    #test2
+    path('test/', test_select2)
 ]

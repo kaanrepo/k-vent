@@ -42,10 +42,13 @@ INSTALLED_APPS = [
     'accounts',
     'store',
     # Third party apps
-    'crispy_forms'
+    'crispy_forms',
+    'debug_toolbar',
+    'django_select2',
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -129,3 +132,8 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]

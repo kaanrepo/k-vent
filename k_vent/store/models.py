@@ -149,6 +149,9 @@ class InventoryOrder(models.Model):
             item_mass = ureg(f'{item.quantity} {item.unit_converted}')
             try:
                 inventory_item = Inventory.objects.get(product=item.product)
+                if inventory_item.unit is None:
+                    inventory_item.unit = item.unit_converted
+                    inventory_item.unit = item.unit_converted
                 inventory_item_mass = ureg(
                     f'{inventory_item.quantity} {inventory_item.unit_converted}')
                 new_mass = inventory_item_mass + item_mass
