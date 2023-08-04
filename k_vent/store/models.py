@@ -89,27 +89,6 @@ class Inventory(models.Model):
     def __str__(self):
         return self.product.name
 
-
-class InventoryOrderItem(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
-    unit = models.CharField(max_length=20, validators=[
-                            validate_unit_of_measure])
-    unit_converted = models.CharField(max_length=20, null=True, blank=True)
-    quantity = models.CharField(max_length=20)
-
-    def __repr__(self):
-        return f'{self.product.name} - {self.quantity} {self.unit_converted}'
-
-    def __str__(self):
-        return f'{self.product.name} - {self.quantity} {self.unit_converted}'
-
-    def save(self, *args, **kwargs):
-        ureg = pint.UnitRegistry()
-        ureg.load_definitions(BASE_DIR / 'my_def.txt')
-        self.unit_converted = str(ureg[f'{self.unit}']).split()[1]
-        super().save(*args, **kwargs)
-
-
 class InventoryOrderManager(models.Manager):
 
     def unrealized_orders(self):
@@ -123,9 +102,9 @@ class InventoryOrderManager(models.Manager):
         return query
 
 
+
 class InventoryOrder(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    items = models.ManyToManyField(InventoryOrderItem)
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
     realized = models.BooleanField(default=False)
@@ -145,7 +124,7 @@ class InventoryOrder(models.Model):
         if self.realized == True:
             return None
         ureg = pint.UnitRegistry()
-        for item in self.items.all():
+        for item in self.order_items.all():
             item_mass = ureg(f'{item.quantity} {item.unit_converted}')
             try:
                 inventory_item = Inventory.objects.get(product=item.product)
@@ -172,6 +151,30 @@ class InventoryOrder(models.Model):
                 self.save()
             except:
                 pass
+
+
+class InventoryOrderItem(models.Model):
+    inventory_order = models.ForeignKey(InventoryOrder, on_delete=models.SET_NULL, null=True, related_name='order_items')
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    unit = models.CharField(max_length=20, validators=[
+                            validate_unit_of_measure])
+    unit_converted = models.CharField(max_length=20, null=True, blank=True)
+    quantity = models.CharField(max_length=20)
+
+    def __repr__(self):
+        return f'{self.product.name} - {self.quantity} {self.unit_converted}'
+
+    def __str__(self):
+        return f'{self.product.name} - {self.quantity} {self.unit_converted}'
+
+    def save(self, *args, **kwargs):
+        ureg = pint.UnitRegistry()
+        ureg.load_definitions(BASE_DIR / 'my_def.txt')
+        self.unit_converted = str(ureg[f'{self.unit}']).split()[1]
+        super().save(*args, **kwargs)
+
+
+
 
 
 class ShopOrderItem(models.Model):

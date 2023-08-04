@@ -1,6 +1,9 @@
 django==4.2.3
 django-crispy-forms==2.0
+crispy-bootstrap5
+crispy-tailwind
 python-decouple
 pint==0.22
 django-debug-toolbar
 django-select2
+django-htmx

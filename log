@@ -1,0 +1,53 @@
+[33mcommit f9e913cc5c872911367078a244b99905ca283b7c[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: kaanrepo <gkaanatsever@gmail.com>
+Date:   Thu Aug 3 21:07:50 2023 +0300
+
+    check
+
+[33mcommit 138490c144daffc5eca1bd03c05afd46087de767[m
+Author: kaanrepo <gkaanatsever@gmail.com>
+Date:   Thu Aug 3 15:50:07 2023 +0300
+
+    Added some views
+
+[33mcommit bb479ec566502c14b1aedc519e0cd40cb76aa368[m
+Author: kaanrepo <gkaanatsever@gmail.com>
+Date:   Wed Aug 2 17:03:46 2023 +0300
+
+    datetime.now -> timezone.now
+
+[33mcommit 73881e044c1fe7f4cd55c7438ab170f6025a9fff[m
+Author: kaanrepo <gkaanatsever@gmail.com>
+Date:   Wed Aug 2 16:39:33 2023 +0300
+
+    Realized date/by fields.
+
+[33mcommit 975da5632b6b0fe1322bfe9383c00dc01378b6cd[m
+Author: kaanrepo <gkaanatsever@gmail.com>
+Date:   Wed Aug 2 16:06:08 2023 +0300
+
+    added tests
+
+[33mcommit d1ceae0507dd8994bfcd456db84277453405226c[m
+Author: kaanrepo <gkaanatsever@gmail.com>
+Date:   Wed Aug 2 12:33:04 2023 +0300
+
+    workflow
+
+[33mcommit 5b8b21e97b6a3fe7e09414502b241ab893c0f06b[m
+Author: kaanrepo <gkaanatsever@gmail.com>
+Date:   Wed Aug 2 12:04:25 2023 +0300
+
+    Added Unit Conversion
+
+[33mcommit 32a86132bca3db83ee3d6d131c004f6cddc74a43[m
+Author: kaanrepo <gkaanatsever@gmail.com>
+Date:   Wed Aug 2 00:42:18 2023 +0300
+
+    Added Models
+
+[33mcommit f18da1dab819ef68b619933749695349093c447c[m
+Author: kaanrepo <gkaanatsever@gmail.com>
+Date:   Tue Aug 1 20:47:55 2023 +0300
+
+    Hello World
